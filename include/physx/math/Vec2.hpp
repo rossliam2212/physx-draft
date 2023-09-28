@@ -10,6 +10,7 @@
 
 #include <llog/llog.hpp>
 
+#include "MathConstants.hpp"
 #include "../exceptions/DivisionByZeroException.hpp"
 
 namespace physx::math {
@@ -230,9 +231,8 @@ namespace physx::math {
         T y;
     };
 
-    using Vec2i = Vec2<int>;            ///< physx::Vec2<int>
-    using Vec2u = Vec2<unsigned int>;   ///< physx::Vec2<unsigned int>
-    using Vec2f = Vec2<float>;          ///< physx::Vec2<float>
+    using Vec2i = Vec2<i32>;             ///< @c physx::Vec2<i32>
+    using Vec2f = Vec2<f32>;             ///< @c physx::Vec2<f32>
 } // namespace physx::math
 
 

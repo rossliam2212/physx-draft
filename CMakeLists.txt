@@ -27,6 +27,9 @@ set(HEADER_FILES
         include/physx/core/objects/Circle2D.hpp
         include/physx/utilities/RandomNumberGenerator.hpp
         include/physx/core/objects/Rectangle2D.hpp
+        include/physx/utilities/Mouse.hpp
+        include/physx/utilities/Utils.hpp
+        include/physx/math/MathConstants.hpp
 )
 
 set(SOURCE_FILES
@@ -47,7 +50,7 @@ set(SOURCE_FILES
         src/utilities/RandomNumberGenerator.cpp
         src/core/objects/Rectangle2D.cpp
         src/utilities/Mouse.cpp
-        include/physx/utilities/Mouse.hpp
+        src/utilities/Utils.cpp
 )
 
 add_executable(physx src/main.cpp ${HEADER_FILES} ${SOURCE_FILES})

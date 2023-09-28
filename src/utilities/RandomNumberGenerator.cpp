@@ -16,10 +16,10 @@ namespace physx::utils {
      *          The maximum value.
      * @return A random integer.
      */
-    int RandomNumberGenerator::random(int min, int max) {
+    int RandomNumberGenerator::random(math::i32 min, math::i32 max) {
         std::random_device rd;
         std::mt19937 mt{rd()};
-        std::uniform_int_distribution<int> dist(min, max);
+        std::uniform_int_distribution<math::i32> dist(min, max);
         return dist(mt);
     }
 
@@ -31,10 +31,10 @@ namespace physx::utils {
      *          The maximum value.
      * @return A random floating-point number.
      */
-    float RandomNumberGenerator::random(float min, float max) {
+    math::f32 RandomNumberGenerator::random(math::f32 min, math::f32 max) {
         std::random_device rd;
         std::mt19937 mt{rd()};
-        std::uniform_real_distribution<float> dist(min, max);
+        std::uniform_real_distribution<math::f32> dist(min, max);
         return dist(mt);
     }
 } // namespace physx::utils

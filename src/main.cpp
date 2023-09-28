@@ -35,6 +35,10 @@ int main() {
 
     // engine.startSimulation(simulation);
 
+//    std::cout << sizeof(short) << "\n";
+//    std::cout << sizeof(int) << "\n";
+//    std::cout << sizeof(std::size_t) << "\n";
+
     physx::core::Engine engine;
     auto* simulation{new physx::core::Simulation};
 

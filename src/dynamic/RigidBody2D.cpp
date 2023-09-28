@@ -13,7 +13,7 @@ namespace physx::dynamic {
      * @param mass
      *          The mass of the @c RigidBody2D.
      */
-    RigidBody2D::RigidBody2D(float mass)
+    RigidBody2D::RigidBody2D(math::f32 mass)
         : mass{mass} {
     }
 
@@ -34,13 +34,13 @@ namespace physx::dynamic {
      * @param position
      *          The position of the @c RigidBody2D.
      */
-    RigidBody2D::RigidBody2D(float mass, const math::Vec2f& position)
+    RigidBody2D::RigidBody2D(math::f32 mass, const math::Vec2f& position)
         : mass{mass},
           position{position} {
     }
 
 
-    void RigidBody2D::updatePosition(float dt) {
+    void RigidBody2D::updatePosition(math::f32 dt) {
         switch (integration) {
             case IntegrationType::Euler:
                 integrateEuler(dt);
@@ -58,7 +58,7 @@ namespace physx::dynamic {
         acceleration += accel;
     }
 
-    void RigidBody2D::integrateVerlet(float dt) {
+    void RigidBody2D::integrateVerlet(math::f32 dt) {
         velocity = position - positionOld;
         positionOld = position;
 
@@ -66,11 +66,11 @@ namespace physx::dynamic {
         acceleration = math::Vec2f::zero();
     }
 
-    void RigidBody2D::integrateEuler(float dt) {
+    void RigidBody2D::integrateEuler(math::f32 dt) {
 
     }
 
-    void RigidBody2D::integrateRK4(float dt) {
+    void RigidBody2D::integrateRK4(math::f32 dt) {
 
     }
 
@@ -78,7 +78,7 @@ namespace physx::dynamic {
      * @brief Gets the mass of the @c RigidBody2D.
      * @return The mass of the @c RigidBody2D.
      */
-    float RigidBody2D::getMass() const {
+    math::f32 RigidBody2D::getMass() const {
         return mass;
     }
 
@@ -92,7 +92,7 @@ namespace physx::dynamic {
 
     /**
      * @brief Gets the velocity of the @c RigidBody2D.
-     * @return The velocity.
+     * @return A reference to the velocity.
      */
     math::Vec2f RigidBody2D::getVelocity() {
         return velocity;

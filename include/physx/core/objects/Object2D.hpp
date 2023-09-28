@@ -20,7 +20,7 @@ namespace physx::core::object {
         Object2D(const math::Vec2f& position, bool rb = false);
         virtual ~Object2D();
 
-        virtual void update(float dt) = 0;
+        virtual void update(math::f32 dt) = 0;
 
         void addRigidBody();
         dynamic::RigidBody2D* getRb();

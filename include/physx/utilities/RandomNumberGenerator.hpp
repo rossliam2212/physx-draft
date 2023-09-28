@@ -10,6 +10,8 @@
 
 #include <random>
 
+#include "../math/MathConstants.hpp"
+
 namespace physx::utils {
     /**
      * @brief @c RandomNumberGenerator class.
@@ -20,8 +22,8 @@ namespace physx::utils {
         RandomNumberGenerator() = default;
         ~RandomNumberGenerator() = default;
 
-        static float random(float min, float max);
-        static int random(int min, int max);
+        static math::f32 random(math::f32 min, math::f32 max);
+        static math::i32 random(math::i32 min, math::i32 max);
     };
 
     using RNG = RandomNumberGenerator;

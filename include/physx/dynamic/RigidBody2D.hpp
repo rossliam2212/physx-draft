@@ -30,12 +30,12 @@ namespace physx::dynamic {
      */
     class RigidBody2D {
     public:
-        RigidBody2D(float mass);
+        RigidBody2D(math::f32 mass);
         RigidBody2D(const math::Vec2f& position);
-        RigidBody2D(float mass, const math::Vec2f& position);
+        RigidBody2D(math::f32 mass, const math::Vec2f& position);
         ~RigidBody2D() = default;
 
-        void updatePosition(float dt);
+        void updatePosition(math::f32 dt);
         void accelerate(const math::Vec2f& accel);
 
         float getMass() const;
@@ -47,7 +47,7 @@ namespace physx::dynamic {
         void setIntegrationMethod(IntegrationType integrationType);
 
     private:
-        float mass{0.f};
+        math::f32 mass{0.f};
         math::Vec2f position{math::Vec2f::zero()};
         math::Vec2f positionOld{math::Vec2f::zero()};
         math::Vec2f velocity{math::Vec2f::zero()};
@@ -55,9 +55,9 @@ namespace physx::dynamic {
 
         IntegrationType integration{IntegrationType::Verlet}; ///< Verlet integration by default.
 
-        void integrateVerlet(float dt);
-        void integrateEuler(float dt);
-        void integrateRK4(float dt);
+        void integrateVerlet(math::f32 dt);
+        void integrateEuler(math::f32 dt);
+        void integrateRK4(math::f32 dt);
     };
 } // namespace physx::dynamic
 

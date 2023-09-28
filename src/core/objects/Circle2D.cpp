@@ -18,12 +18,12 @@ namespace physx::core::object {
      * @param rb
      *          Whether the circle has a @c RigidBody2D or not.
      */
-    Circle2D::Circle2D(float radius, const math::Vec2f& position, bool rb)
+    Circle2D::Circle2D(math::f32 radius, const math::Vec2f& position, bool rb)
         : Object2D{position, rb},
           radius{radius} {
     }
 
-    void Circle2D::update(float dt) {
+    void Circle2D::update(math::f32 dt) {
         if (rb != nullptr) {
             rb->updatePosition(dt);
         }
@@ -33,11 +33,15 @@ namespace physx::core::object {
      * @brief Gets the radius of the @c Circle2D.
      * @return The radius.
      */
-    float Circle2D::getRadius() const {
+    math::f32 Circle2D::getRadius() const {
         return radius;
     }
 
-    float Circle2D::getMass() const {
+    /**
+     * @brief Gets the mass of the @c Circle2D.
+     * @return The masss.
+     */
+    math::f32 Circle2D::getMass() const {
         return mass;
     }
 } // namespace physx::core::object

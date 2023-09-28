@@ -19,16 +19,16 @@ namespace physx::core::object {
      */
     class Circle2D : public Object2D {
     public:
-        Circle2D(float radius, const math::Vec2f& position, bool rb = false);
+        Circle2D(math::f32 radius, const math::Vec2f& position, bool rb = false);
         ~Circle2D() override = default;
 
-        void update(float dt) override;
+        void update(math::f32 dt) override;
         float getRadius() const;
         float getMass() const;
 
     private:
-        float mass{200.f};
-        float radius;
+        math::f32 mass{500.f};
+        math::f32 radius;
     };
 } // namespace physx::core::object
 

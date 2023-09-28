@@ -22,7 +22,7 @@ namespace physx::math {
     class Matrix2 {
     public:
         Matrix2() = default;
-        Matrix2(float element00, float element01, float element10, float element11);
+        Matrix2(math::f32 element00, math::f32 element01, math::f32 element10, math::f32 element11);
         ~Matrix2() = default;
 
         Matrix2 operator*(const Matrix2& other) const;
@@ -32,13 +32,13 @@ namespace physx::math {
         Matrix2 inverse() const;
         float determinant() const;
 
-        float get00() const;
-        float get01() const;
-        float get10() const;
-        float get11() const;
+        math::f32 get00() const;
+        math::f32 get01() const;
+        math::f32 get10() const;
+        math::f32 get11() const;
 
     private:
-        std::array<std::array<float, 2>, 2> elements;
+        std::array<std::array<math::f32, 2>, 2> elements;
     };
 } // namespace physx::math
 

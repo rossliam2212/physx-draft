@@ -13,7 +13,6 @@
 
 #include "../utilities/FixedClock.hpp"
 #include "Renderer.hpp"
-#include "../utilities/Mouse.hpp"
 
 namespace physx::core {
     /**
@@ -41,7 +40,6 @@ namespace physx::core {
         void endSimulation();
         void setupWindow();
         void setupRenderer();
-        void setupLLOG();
     };
 } // namespace physx::core
 

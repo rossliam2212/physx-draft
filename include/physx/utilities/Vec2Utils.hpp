@@ -13,10 +13,10 @@
 #include "../math/Vec2.hpp"
 
 namespace physx::utils {
-    float dot(const math::Vec2f& a, const math::Vec2f& b);
-    float cross(const math::Vec2f& a, const math::Vec2f& b);
-    float length(const math::Vec2f& vec);
-    float distance(const math::Vec2f& a, const math::Vec2f& b);
+    math::f32 dot(const math::Vec2f& a, const math::Vec2f& b);
+    math::f32 cross(const math::Vec2f& a, const math::Vec2f& b);
+    math::f32 length(const math::Vec2f& vec);
+    math::f32 distance(const math::Vec2f& a, const math::Vec2f& b);
     math::Vec2f normalize(const math::Vec2f& vec);
     math::Vec2f sfVecToVec2(const sf::Vector2f& vec);
 } // namespace physx::utils

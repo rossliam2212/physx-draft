@@ -22,7 +22,7 @@ namespace physx::utils {
         if (!window->getSystemHandle()) {
             return math::Vec2f::zero();
         }
-        return {(float)sf::Mouse::getPosition().x, (float)sf::Mouse::getPosition().y};
+        return {(math::f32)sf::Mouse::getPosition().x, (math::f32)sf::Mouse::getPosition().y};
     }
 
     math::Vec2f Mouse::getCoords() {

@@ -14,6 +14,7 @@
 #include "../core/objects/Rectangle2D.hpp"
 #include "../utilities/Vec2Utils.hpp"
 #include "../utilities/Mouse.hpp"
+#include "../utilities/Utils.hpp"
 
 namespace physx::core {
     /**
@@ -25,25 +26,25 @@ namespace physx::core {
         Simulation();
         ~Simulation();
 
-        void update(float dt);
+        void update(math::f32 dt);
 
-        void addCircleObject(float radius, const math::Vec2f& position, bool rb, dynamic::IntegrationType integrationType = dynamic::IntegrationType::Verlet);
-        void addRectangleObject(float width, float height, const math::Vec2f& position, bool rb, dynamic::IntegrationType integrationType = dynamic::IntegrationType::Verlet);
+        void addCircleObject(math::f32 radius, const math::Vec2f& position, bool rb, dynamic::IntegrationType integrationType = dynamic::IntegrationType::Verlet);
+        void addRectangleObject(math::f32 width, math::f32 height, const math::Vec2f& position, bool rb, dynamic::IntegrationType integrationType = dynamic::IntegrationType::Verlet);
         void addObject(object::Object2D* obj);
         std::vector<object::Object2D*> getObjects();
 
     private:
         std::vector<object::Object2D*> objects;
 
-        math::Vec2f gravity{0.f, 1000.f};
-        float restitution{0.2f}; ///< Elasticity of a collision
-        float friction{0.1f};
+        math::Vec2f gravity{0.f, 1000.f};     ///< Gravity
+        math::f32 restitution{0.2f};          ///< Elasticity of a collision
+        math::f32 friction{0.1f};             ///< Friction coefficient
 
         void checkForMouseEvents();
-        void updatePositions(float dt);
+        void updatePositions(math::f32 dt);
         void applyGravity();
         void applyConstraints();
-        void checkCollisions(float dt);
+        void checkCollisions(math::f32 dt);
         bool checkSATCollision(object::Circle2D& a, object::Circle2D& b);
         void handleCollisionResponse(object::Circle2D& a, object::Circle2D& b);
     };

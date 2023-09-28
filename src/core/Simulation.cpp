@@ -13,6 +13,7 @@ namespace physx::core {
      * @brief @c Simulation constructor.
      */
     Simulation::Simulation() {
+        utils::configureLLOG();
         LLOG_DEBUG("Simulation created.")
     }
 
@@ -29,7 +30,7 @@ namespace physx::core {
 //        }
     }
 
-    void Simulation::update(float dt) {
+    void Simulation::update(math::f32 dt) {
         checkForMouseEvents();
         updatePositions(dt);
         applyConstraints();
@@ -48,7 +49,7 @@ namespace physx::core {
      * @param integrationType
      *          The numerical integration the @c RigidBody2D should use.
      */
-    void Simulation::addCircleObject(float radius, const math::Vec2f& position, bool rb,
+    void Simulation::addCircleObject(math::f32 radius, const math::Vec2f& position, bool rb,
                                      dynamic::IntegrationType integrationType) {
         objects.emplace_back(new object::Circle2D{radius, position, rb});
         LLOG_DEBUG("Added Circle2D object to simulation @ pos {}.", position.toString())
@@ -104,7 +105,7 @@ namespace physx::core {
         }
     }
 
-    void Simulation::updatePositions(float dt) {
+    void Simulation::updatePositions(math::f32 dt) {
         for (auto& obj : objects) {
             if (obj->isRbEnabled()) {
                 obj->update(dt);
@@ -126,7 +127,7 @@ namespace physx::core {
             auto cast{dynamic_cast<object::Circle2D*>(obj)};
             if (cast) {
                 math::Vec2f v{math::Vec2f{500.f, 500.f} - obj->getRb()->getPosition()};
-                float distance{utils::length(v)};
+                math::f32 distance{utils::length(v)};
 
                 if (distance > (450.f - cast->getRadius())) {
                     math::Vec2f n{v / distance};
@@ -145,7 +146,7 @@ namespace physx::core {
         }
     }
 
-    void Simulation::checkCollisions(float dt) {
+    void Simulation::checkCollisions(math::f32 dt) {
 //        float responseCEOF{0.75f};
 //        uint64_t numObjects{objects.size()};
 //
@@ -188,6 +189,8 @@ namespace physx::core {
                 if (checkSATCollision(*obj1, *obj2)) {
                     LLOG_DEBUG("COLLISION")
                     handleCollisionResponse(*obj1, *obj2);
+//                    obj1->getRb()->setVelocity({10, 0});
+//                    obj2->getRb()->setVelocity({-10, 0});
                 }
             }
         }
@@ -195,11 +198,11 @@ namespace physx::core {
 
     bool Simulation::checkSATCollision(object::Circle2D& a, object::Circle2D& b) {
         // Calculate the vector from circleA center to circleB center.
-        float dx{b.getRb()->getPosition().getX() - a.getRb()->getPosition().getX()};
-        float dy{b.getRb()->getPosition().getY() - a.getRb()->getPosition().getY()};
+        math::f32 dx{b.getRb()->getPosition().getX() - a.getRb()->getPosition().getX()};
+        math::f32 dy{b.getRb()->getPosition().getY() - a.getRb()->getPosition().getY()};
 
         // Calculate the distance between the two circle centers.
-        float distance{std::sqrt(dx * dx + dy * dy)};
+        math::f32 distance{std::sqrt(dx * dx + dy * dy)};
 
         // If the distance is less than the sum of the radii, they are colliding.
         return distance < (a.getRadius() + b.getRadius());
@@ -211,12 +214,12 @@ namespace physx::core {
 
         // Calculate relative velocity
         math::Vec2f relativeVelocity{b.getRb()->getVelocity() - a.getRb()->getVelocity()};
-        float relativeSpeed{utils::dot(relativeVelocity, collisionNormal)};
+        math::f32 relativeSpeed{utils::dot(relativeVelocity, collisionNormal)};
 
         // Check if objects are moving toward each other
         if (relativeSpeed > 0) {
             // Calculate impulse
-            float impulse{-(1 + restitution) * relativeSpeed / (1 / a.getMass() + 1 / b.getMass())};
+            math::f32 impulse{-(1 + restitution) * relativeSpeed / (1 / a.getMass() + 1 / b.getMass())};
 
             // Calculate friction impulse
             math::Vec2f frictionImpulse{relativeVelocity - (collisionNormal * relativeSpeed)};
@@ -226,15 +229,15 @@ namespace physx::core {
             math::Vec2f tempA{a.getRb()->getVelocity() - impulse - frictionImpulse};
             tempA /= a.getMass();
             tempA = tempA * collisionNormal;
-            a.getRb()->setVelocity(tempA);
+            a.getRb()->setVelocity(tempA / 25.f);
 
             math::Vec2f tempB{b.getRb()->getVelocity() + impulse + frictionImpulse};
             tempB /= b.getMass();
             tempB = tempB * collisionNormal;
-            b.getRb()->setVelocity(tempB);
+            b.getRb()->setVelocity(tempB / 25.f);
 
             // Perform position correction to resolve overlap
-            float overlap{a.getRadius() + b.getRadius() - utils::distance(a.getRb()->getPosition(), b.getRb()->getPosition())};
+            math::f32 overlap{a.getRadius() + b.getRadius() - utils::distance(a.getRb()->getPosition(), b.getRb()->getPosition())};
             math::Vec2f correction{collisionNormal * 0.5f * overlap};
             a.getRb()->setPosition(a.getRb()->getPosition() - correction);
             b.getRb()->setPosition(b.getRb()->getPosition() + correction);

@@ -15,8 +15,7 @@ namespace physx::core {
      */
     Engine::Engine()
         : dtClock{true} {
-        setupLLOG();
-        LLOG_DEBUG("llog configured.")
+        utils::configureLLOG();
         LLOG_INFO("physx starting...")
         setupWindow();
         setupRenderer();
@@ -116,17 +115,5 @@ namespace physx::core {
     void Engine::setupRenderer() {
         renderer = new Renderer{window};
         LLOG_DEBUG("Renderer initialized.")
-    }
-
-    /**
-     * @brief Setting up @c llog logger config.
-     */
-    void Engine::setupLLOG() {
-        llog::Config cfg;
-        cfg.enableConsoleColors();
-        cfg.useLowercaseLogLevels();
-        cfg.displayOnlyLogLevelInColor();
-//        cfg.disableDebugLogLevel();
-        llog::setLoggerConfig(cfg);
     }
 } // namespace physx::core

@@ -16,7 +16,7 @@ namespace physx::utils {
      *          The second @c Vec2f.
      * @return The dot product.
      */
-    float dot(const math::Vec2f& a, const math::Vec2f& b) {
+    math::f32 dot(const math::Vec2f& a, const math::Vec2f& b) {
         return (a.getX() * b.getX()) + (a.getY() + b.getY());
     }
 
@@ -28,7 +28,7 @@ namespace physx::utils {
      *          The second @c Vec2f.
      * @return The cross product.
      */
-    float cross(const math::Vec2f& a, const math::Vec2f& b) {
+    math::f32 cross(const math::Vec2f& a, const math::Vec2f& b) {
         return a.getX() * b.getY() - a.getY() * b.getX();
     }
 
@@ -38,7 +38,7 @@ namespace physx::utils {
      *          The @c Vec2f to calculate the length of.
      * @return The length of the @c Vec2f.
      */
-    float length(const math::Vec2f& vec) {
+    math::f32 length(const math::Vec2f& vec) {
         return std::sqrt(vec.getX() * vec.getX() + vec.getY() * vec.getY());
     }
 
@@ -50,7 +50,7 @@ namespace physx::utils {
      *          The second @c Vec2f.
      * @return The distance.
      */
-    float distance(const math::Vec2f& a, const math::Vec2f& b) {
+    math::f32 distance(const math::Vec2f& a, const math::Vec2f& b) {
         float num1{a.getX() - b.getX()};
         float num2{a.getY() - b.getY()};
         return std::sqrt((num1 * num1) + (num2 * num2));
@@ -63,10 +63,10 @@ namespace physx::utils {
      * @return The normalized vector.
      */
     math::Vec2f normalize(const math::Vec2f& vec) {
-        float len{length(vec)};
+        math::f32 len{length(vec)};
         if (len != 0) {
-            float x{vec.getX() / len};
-            float y{vec.getY() / len};
+            math::f32 x{vec.getX() / len};
+            math::f32 y{vec.getY() / len};
 
             return {x, y};
         } else {

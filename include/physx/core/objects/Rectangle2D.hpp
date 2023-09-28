@@ -13,16 +13,16 @@
 namespace physx::core::object {
     class Rectangle2D : public Object2D {
     public:
-        Rectangle2D(float width, float height, const math::Vec2f& position, bool rb = false);
+        Rectangle2D(math::f32 width, math::f32 height, const math::Vec2f& position, bool rb = false);
         ~Rectangle2D() override = default;
 
-        void update(float dt) override;
+        void update(math::f32 dt) override;
         float getWidth() const;
         float getHeight() const;
 
     private:
-        float width;
-        float height;
+        math::f32 width;
+        math::f32 height;
     };
 } // namespace physx::core::object
 
